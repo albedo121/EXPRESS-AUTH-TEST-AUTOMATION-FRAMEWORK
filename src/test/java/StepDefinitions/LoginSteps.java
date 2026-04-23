@@ -2,12 +2,15 @@ package StepDefinitions;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import io.cucumber.java.PendingException;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.LoginPage;
 
 import java.time.Duration;
@@ -17,16 +20,21 @@ public class LoginSteps {
     //Initialize
     private WebDriver driver;
     private LoginPage login;
+    private WebDriverWait wait;
     private String url = "https://expressauth-zzn0.onrender.com/";
 
     //Setup Browser
     @Before
     public void BrowserSetup() {
+        //Define options
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+
         System.out.println("Launching browser");
-        driver = new ChromeDriver();
+        driver = new ChromeDriver(options);
         driver.manage().window().maximize();   //Maximize window
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(60));  //Implicit wait of 60s
-        login = new LoginPage(driver);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
+        login = new LoginPage(driver, wait);
     }
 
     //Close Browser
@@ -47,7 +55,7 @@ public class LoginSteps {
         driver.get(url);
     }
 
-    @When("user enters valid {string} and {string}")
+    @When("user enters valid email {string} and password {string}")
     public void user_enters_valid_email_and_password(String email, String password) {
         //Enter email and password
         login.Enter_Email(email);
@@ -63,7 +71,22 @@ public class LoginSteps {
     @Then("user is logged in and navigated to dashboard page")
     public void user_is_logged_in_and_navigated_to_dashboard_page() {
         //Check if user was logged in by checking if navigated to dashboard page
-        login.Check_Is_Dashboard_Page();
+        login.Is_Logged_In();
     }
+
+
+    @When("user enters valid email {string} and invalid password {string}")
+    public void user_enters_invalid_and_valid(String email, String password) {
+        //Enter valid email and invalid password
+        login.Enter_Email(email);
+        login.Enter_Password(password);
+    }
+
+    @Then("user is unable to login and error message is displayed")
+    public void user_is_unable_to_login_and_error_message_is_displayed() {
+        //Check user was not logged in
+        login.Is_Login_failed();
+    }
+
 
 }

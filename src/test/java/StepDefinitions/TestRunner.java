@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 @CucumberOptions(features = "src/test/resources/Features",
         glue = {"StepDefinitions"},
         monochrome = true,
-        plugin = {"pretty","html:target/Reports/Html_report.html", "json:target/Reports/Json_report.json", "junit:target/Reports/Junit_report.xml"})
+        plugin = {"pretty","html:target/Reports/Html_report.html", "json:target/Reports/Json_report.json", "junit:target/Reports/Junit_report.xml"},
+        tags = "@smoke")
 public class TestRunner {
 }
