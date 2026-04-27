@@ -69,6 +69,7 @@ public class LoginPage {
         softAssert.assertAll();
     }
 
+    //This function checks if login failed by checking if text 'Invalid credentials or user does not exists is displayed'
     public void Is_Login_failed(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(Login_failed_Text));
         String text = driver.findElement(Login_failed_Text).getText();

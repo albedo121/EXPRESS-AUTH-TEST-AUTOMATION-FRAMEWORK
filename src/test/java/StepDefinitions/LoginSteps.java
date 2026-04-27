@@ -15,6 +15,8 @@ import pages.LoginPage;
 
 import java.time.Duration;
 
+import utils.ConfigManager;
+
 public class LoginSteps {
 
     //Initialize
@@ -56,7 +58,12 @@ public class LoginSteps {
     }
 
     @When("user enters valid email {string} and password {string}")
-    public void user_enters_valid_email_and_password(String email, String password) {
+    public void user_enters_valid_email_and_password(String emailKey, String passwordKey) {
+
+        //Get valid email and password from .env
+        String email = ConfigManager.get(emailKey);
+        String password = ConfigManager.get(passwordKey);
+
         //Enter email and password
         login.Enter_Email(email);
         login.Enter_Password(password);
@@ -76,7 +83,7 @@ public class LoginSteps {
 
 
     @When("user enters valid email {string} and invalid password {string}")
-    public void user_enters_invalid_and_valid(String email, String password) {
+    public void user_enters_valid_email_and_invalid_password(String email, String password) {
         //Enter valid email and invalid password
         login.Enter_Email(email);
         login.Enter_Password(password);
@@ -88,5 +95,10 @@ public class LoginSteps {
         login.Is_Login_failed();
     }
 
+    @When("user enters invalid email {string} and valid password {string}")
+    public void user_enters_invalid_email_and_valid_password(String email, String password) {
+        login.Enter_Email(email);
+        login.Enter_Password(password);
+    }
 
 }
