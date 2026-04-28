@@ -13,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
  
       # Step 2 - setup Java (change version if your project uses different)
-      - name: Set up JDK 17
+      - name: Set up JDK
         uses: actions/setup-java@v4
         with:
           java-version: '23'
@@ -41,5 +41,5 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: cucumber-report
-          path: target/cucumber-report.html
+          path: target/Reports/
     
