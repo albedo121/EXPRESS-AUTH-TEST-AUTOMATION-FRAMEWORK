@@ -1,0 +1,45 @@
+name: Selenium Tests
+on:
+  push:
+    branches: [main]
+jobs:
+  test:
+    timeout-minutes: 10
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1 - checkout your codeṁ
+      - name: Checkout code
+        uses: actions/checkout@v4
+ 
+      # Step 2 - setup Java (change version if your project uses different)
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+ 
+      # Step 3 - install Google Chrome (needed for Selenium)
+      - name: Install Chrome
+        uses: browser-actions/setup-chrome@v1
+ 
+      # Step 4 - create secrets.env file from GitHub secret
+      # GitHub Actions injects ENV_FILE secret as the full file content
+      - name: Create secrets.env
+        run: echo "${{ secrets.ENV_FILE }}" > secrets.env
+ 
+      # Step 5 - run all tests
+      # -Dtest skips unit test phase and runs cucumber tests
+      # surefire plugin picks up your runner class automatically
+      - name: Run Selenium Tests
+        run: mvn test
+ 
+      # Step 6 - upload test report so you can view results on GitHub
+      # runs even if tests fail so you can always see the report
+      - name: Upload Test Report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cucumber-report
+          path: target/cucumber-report.html
+    
