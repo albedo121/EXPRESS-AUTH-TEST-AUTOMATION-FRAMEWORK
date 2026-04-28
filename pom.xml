@@ -12,7 +12,12 @@
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- suppresses download progress logs only -->
+        <maven.wagon.http.pool>false</maven.wagon.http.pool>
     </properties>
+
+
 
     <dependencies>
         <!-- Source: https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-java -->
