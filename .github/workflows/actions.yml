@@ -27,7 +27,10 @@ jobs:
       # Step 4 - create secrets.env file from GitHub secret
       # GitHub Actions injects ENV_FILE secret as the full file content
       - name: Create secrets.env
-        run: echo "${{ secrets.CREDENTIALS }}" > secrets.env
+        run: |
+          cat << 'EOF' > secrets.env
+          ${{ secrets.CREDENTIALS }}
+          EOF
  
       # Step 5 - run all tests
       # -Dtest skips unit test phase and runs cucumber tests
