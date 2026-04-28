@@ -2,12 +2,9 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.bidi.log.Log;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.asserts.SoftAssert;
-
-import java.time.Duration;
+import org.junit.Assert;
 
 public class LoginPage {
 
@@ -64,18 +61,15 @@ public class LoginPage {
     public void Is_Logged_In(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(Dashboard_Text));
         String text = driver.findElement(Dashboard_Text).getText();
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(text, "USER DASHBOARD", "Dashboard page text mismatch or login failed.");
-        softAssert.assertAll();
+        Assert.assertEquals("Dashboard page text mismatch or login failed.", "USER DASHBOARD", text);
+
     }
 
-    //This function checks if login failed by checking if text 'Invalid credentials or user does not exists is displayed'
+    //This function checks if login failed by checking if text 'Invalid credentials or user does not exist is displayed'
     public void Is_Login_failed(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(Login_failed_Text));
         String text = driver.findElement(Login_failed_Text).getText();
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertEquals(text, "Invalid credentials or user does not exists.", "Login fail text mismatch");
-        softAssert.assertAll();
+        Assert.assertEquals("Login fail text mismatch", "Invalid credentials or user does not exists.", text);
     }
 
 }

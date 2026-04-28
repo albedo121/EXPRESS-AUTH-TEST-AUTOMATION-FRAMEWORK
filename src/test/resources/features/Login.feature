@@ -1,7 +1,7 @@
 #noinspection SpellCheckingInspection
 Feature: To test login functionality
 
-  @positive @test
+  @positive @smoke
   Scenario Outline: Successful login on entering valid credentials.
     Given user is on login page
     When user enters valid email "<email>" and password "<password>"
@@ -16,7 +16,7 @@ Feature: To test login functionality
       | VALID_EMAIL_4 | VALID_PASSWORD_4 |
       | VALID_EMAIL_5 | VALID_PASSWORD_5 |
 
-  @negative-test
+  @negative-test @smoke
   Scenario Outline: Unsuccessful login on entering valid email and invalid password.
     Given user is on login page
     When user enters valid email "<email>" and invalid password "<password>"
@@ -31,7 +31,7 @@ Feature: To test login functionality
       | sarah.connor@email.com | Terminator-T1000 |
       | john.doe@company.com   | Secure@Pass122   |
 
-  @negative-test
+  @negative-test @smoke
   Scenario Outline: Unsuccessful login on entering invalid email and valid password.
     Given user is on login page
     When user enters invalid email "<email>" and valid password "<password>"
