@@ -16,7 +16,7 @@ jobs:
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
-          java-version: '17'
+          java-version: '23'
           distribution: 'temurin'
  
       # Step 3 - install Google Chrome (needed for Selenium)
@@ -26,7 +26,7 @@ jobs:
       # Step 4 - create secrets.env file from GitHub secret
       # GitHub Actions injects ENV_FILE secret as the full file content
       - name: Create secrets.env
-        run: echo "${{ secrets.ENV_FILE }}" > secrets.env
+        run: echo "${{ secrets.CREDENTIALS }}" > secrets.env
  
       # Step 5 - run all tests
       # -Dtest skips unit test phase and runs cucumber tests
