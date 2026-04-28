@@ -18,6 +18,7 @@ jobs:
         with:
           java-version: '23'
           distribution: 'temurin'
+          cache: 'maven'
  
       # Step 3 - install Google Chrome (needed for Selenium)
       - name: Install Chrome
@@ -32,7 +33,7 @@ jobs:
       # -Dtest skips unit test phase and runs cucumber tests
       # surefire plugin picks up your runner class automatically
       - name: Run Selenium Tests
-        run: mvn test
+        run: mvn clean test
  
       # Step 6 - upload test report so you can view results on GitHub
       # runs even if tests fail so you can always see the report
