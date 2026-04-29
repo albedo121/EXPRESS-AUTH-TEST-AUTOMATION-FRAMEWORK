@@ -7,6 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.Credentials;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -46,6 +47,12 @@ public class LoginSteps {
         driver.quit();
     }
 
+    //Helper function to fetch credentials from env file
+    public String getCredentials(String key){
+        String value = ConfigManager.get(key);
+        return (value != null) ? value : key;
+    }
+
     //DEFINE STEP METHODS FROM HERE---------------------------------
 
     @Given("user is on login page")
@@ -60,9 +67,9 @@ public class LoginSteps {
     @When("user enters valid email {string} and password {string}")
     public void user_enters_valid_email_and_password(String emailKey, String passwordKey) {
 
-        //Get valid email and password from .env
-        String email = ConfigManager.get(emailKey);
-        String password = ConfigManager.get(passwordKey);
+        //Fetch email and password from env file
+        String email = getCredentials(emailKey);
+        String password = getCredentials(passwordKey);
 
         //Enter email and password
         login.Enter_Email(email);
@@ -83,8 +90,13 @@ public class LoginSteps {
 
 
     @When("user enters valid email {string} and invalid password {string}")
-    public void user_enters_valid_email_and_invalid_password(String email, String password) {
-        //Enter valid email and invalid password
+    public void user_enters_valid_email_and_invalid_password(String emailKey, String passwordKey) {
+
+        //Fetch email and password from env file
+        String email = getCredentials(emailKey);
+        String password = getCredentials(passwordKey);
+
+        //Enter email and password
         login.Enter_Email(email);
         login.Enter_Password(password);
     }
@@ -96,7 +108,13 @@ public class LoginSteps {
     }
 
     @When("user enters invalid email {string} and valid password {string}")
-    public void user_enters_invalid_email_and_valid_password(String email, String password) {
+    public void user_enters_invalid_email_and_valid_password(String emailKey, String passwordKey) {
+
+        //Fetch email and password from env file
+        String email = getCredentials(emailKey);
+        String password = getCredentials(passwordKey);
+
+        //Enter email and password
         login.Enter_Email(email);
         login.Enter_Password(password);
     }
