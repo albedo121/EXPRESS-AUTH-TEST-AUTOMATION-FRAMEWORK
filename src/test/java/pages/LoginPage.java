@@ -12,11 +12,11 @@ public class LoginPage {
     protected WebDriverWait wait;
 
     //DEFINE LOCATORS HERE------------------------------
-    private By Email_Input_Box = By.xpath("(//input[@type='email'])[1]");   //Email input box
-    private By Password_Input_Box = By.xpath("(//input[@type='password'])[1]");   //Password input box
-    private By Submit_Button = By.xpath("(//input[@type='submit'])[1]");   //Submit button
-    private By Dashboard_Text = By.xpath("//*[contains(text(),'USER DASHBOARD')]");   //Dashboard text
-    private By Login_failed_Text = By.xpath("//body[text()='Invalid credentials or user does not exists.']");   //Login failed text
+    private final By Email_Input_Box = By.xpath("(//input[@type='email'])[1]");   //Email input box
+    private final By Password_Input_Box = By.xpath("(//input[@type='password'])[1]");   //Password input box
+    private final By Submit_Button = By.xpath("(//input[@type='submit'])[1]");   //Submit button
+    private final By Dashboard_Text = By.xpath("//*[contains(text(),'USER DASHBOARD')]");   //Dashboard text
+    private final By Login_failed_Text = By.xpath("//body[text()='Invalid credentials or user does not exists.']");   //Login failed text
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
         this.driver = driver;

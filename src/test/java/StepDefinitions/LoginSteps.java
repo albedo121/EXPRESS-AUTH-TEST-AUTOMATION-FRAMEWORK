@@ -1,57 +1,24 @@
 package StepDefinitions;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
-import io.cucumber.java.PendingException;
+import Base.BaseClass;
+
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.Credentials;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 import pages.LoginPage;
-
-import java.time.Duration;
-
-import utils.ConfigManager;
 
 public class LoginSteps {
 
-    //Initialize
-    private WebDriver driver;
-    private LoginPage login;
-    private WebDriverWait wait;
-    private String url = "https://expressauth-zzn0.onrender.com/";
+    private final BaseClass base;
+    private final LoginPage login;
 
-    //Setup Browser
-    @Before
-    public void BrowserSetup() {
-        //Define options
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-
-        System.out.println("Launching browser");
-        driver = new ChromeDriver(options);
-        driver.manage().window().maximize();   //Maximize window
-        wait = new WebDriverWait(driver, Duration.ofSeconds(60));
-        login = new LoginPage(driver, wait);
+    public LoginSteps(BaseClass base) {
+        this.base = base;
+        this.login = new LoginPage(base.driver, base.wait);
     }
 
-    //Close Browser
-    @After
-    public void Teardown(){
-        System.out.println("Teardown");
-        driver.quit();
-    }
-
-    //Helper function to fetch credentials from env file
-    public String getCredentials(String key){
-        String value = ConfigManager.get(key);
-        return (value != null) ? value : key;
-    }
 
     //DEFINE STEP METHODS FROM HERE---------------------------------
 
@@ -61,15 +28,15 @@ public class LoginSteps {
         System.out.println("Navigating to url...");
 
         //Navigate to given url
-        driver.get(url);
+        base.driver.get(base.url);
     }
 
     @When("user enters valid email {string} and password {string}")
     public void user_enters_valid_email_and_password(String emailKey, String passwordKey) {
 
         //Fetch email and password from env file
-        String email = getCredentials(emailKey);
-        String password = getCredentials(passwordKey);
+        String email = base.getCredentials(emailKey);
+        String password = base.getCredentials(passwordKey);
 
         //Enter email and password
         login.Enter_Email(email);
@@ -93,8 +60,8 @@ public class LoginSteps {
     public void user_enters_valid_email_and_invalid_password(String emailKey, String passwordKey) {
 
         //Fetch email and password from env file
-        String email = getCredentials(emailKey);
-        String password = getCredentials(passwordKey);
+        String email = base.getCredentials(emailKey);
+        String password = base.getCredentials(passwordKey);
 
         //Enter email and password
         login.Enter_Email(email);
@@ -111,8 +78,8 @@ public class LoginSteps {
     public void user_enters_invalid_email_and_valid_password(String emailKey, String passwordKey) {
 
         //Fetch email and password from env file
-        String email = getCredentials(emailKey);
-        String password = getCredentials(passwordKey);
+        String email = base.getCredentials(emailKey);
+        String password = base.getCredentials(passwordKey);
 
         //Enter email and password
         login.Enter_Email(email);

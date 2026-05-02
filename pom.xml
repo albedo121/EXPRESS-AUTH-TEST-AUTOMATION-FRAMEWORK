@@ -36,6 +36,13 @@
             <scope>compile</scope>
         </dependency>
 
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-picocontainer</artifactId>
+            <version>7.34.3</version>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Source: https://mvnrepository.com/artifact/junit/junit -->
         <dependency>
             <groupId>junit</groupId>
