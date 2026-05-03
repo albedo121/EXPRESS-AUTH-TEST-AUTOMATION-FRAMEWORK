@@ -19,7 +19,6 @@ public class LoginSteps {
         this.login = new LoginPage(base.driver, base.wait);
     }
 
-
     //DEFINE STEP METHODS FROM HERE---------------------------------
 
     @Given("user is on login page")

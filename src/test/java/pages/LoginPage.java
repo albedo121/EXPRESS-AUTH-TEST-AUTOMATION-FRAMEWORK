@@ -8,8 +8,14 @@ import org.junit.Assert;
 
 public class LoginPage {
 
+    //INITIALIZE WEBDRIVER HERE
     protected WebDriver driver;
     protected WebDriverWait wait;
+
+    public LoginPage(WebDriver driver, WebDriverWait wait) {
+        this.driver = driver;
+        this.wait = wait;
+    }
 
     //DEFINE LOCATORS HERE------------------------------
     private final By Email_Input_Box = By.xpath("(//input[@type='email'])[1]");   //Email input box
@@ -17,11 +23,6 @@ public class LoginPage {
     private final By Submit_Button = By.xpath("(//input[@type='submit'])[1]");   //Submit button
     private final By Dashboard_Text = By.xpath("//*[contains(text(),'USER DASHBOARD')]");   //Dashboard text
     private final By Login_failed_Text = By.xpath("//body[text()='Invalid credentials or user does not exists.']");   //Login failed text
-
-    public LoginPage(WebDriver driver, WebDriverWait wait) {
-        this.driver = driver;
-        this.wait = wait;
-    }
 
     //DEFINE METHODS HERE------------------------------
 

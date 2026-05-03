@@ -16,11 +16,15 @@
 
 Feature: To test logout functionality
 
-  Scenario: User clicks the logout button and is redirected to the login page.
-    Given user is logged in
-    And user clicks logout button
-    Then user is logged out and redirected to login page
+  Background:
+    Given user is on login page
 
-  Scenario:
-
+  Scenario Outline: Successful logout for different user roles
+    And user with role "<role>" enters email "<email>" and password "<password>"
+    When user clicks logout button
+    Then user is logged out and navigated to login page
+    Examples:
+      | role  | email         | password         |
+      | user  | VALID_EMAIL_5 | VALID_PASSWORD_5 |
+      | admin | ADMIN_EMAIL_1 | ADMIN_PASSWORD_1 |
 
