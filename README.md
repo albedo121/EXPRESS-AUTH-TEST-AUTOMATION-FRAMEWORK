@@ -1,4 +1,4 @@
-# UserAuthFlowAutomation
+# UserAuthFlowAutomation [WIP]
 
 A Selenium-based test automation framework for validating user authentication flows using Behavior-Driven Development (BDD) with Cucumber. This project automates login scenarios including successful and unsuccessful login attempts, with page object model design pattern implementation.
 
