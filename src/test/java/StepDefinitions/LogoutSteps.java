@@ -16,11 +16,11 @@ public class LogoutSteps {
     public LogoutSteps(BaseClass base) {
         this.base = base;
         this.login = new LoginPage(base.driver, base.wait);
-        this.Dashboard = new DashboardPage(base.driver, base.wait);
+        this.Dashboard = new DashboardPage(base.driver, base.wait, base);
     }
 
     //DEFINE STEP METHODS FROM HERE---------------------------------
-    @Given("user with role {string} enters email {string} and password {string}")
+    @When("user with role {string} enters email {string} and password {string}")
     public void user_with_role_enters_email_and_password(String role, String emailKey, String passwordKey) {
         //Fetch email and password from env file
         String email = base.getCredentials(emailKey);
@@ -39,6 +39,6 @@ public class LogoutSteps {
 
     @Then("user is logged out and navigated to login page")
     public void user_is_logged_out_and_navigated_to_login_page() {
-
+        Dashboard.Is_Logged_Button();
     }
 }
